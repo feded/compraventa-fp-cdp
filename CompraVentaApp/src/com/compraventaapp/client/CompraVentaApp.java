@@ -28,7 +28,7 @@ import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 
 /**
- * Entry point classes define <code>onModuleLoad()</code>.
+ * Entry point classes define <code>onModuleLoad()</code>. hola
  */
 public class CompraVentaApp implements EntryPoint {
 	/**
@@ -59,7 +59,7 @@ public class CompraVentaApp implements EntryPoint {
         tabPane1.setHeight100();  
         tabPane1.addChild(getGwtTab());  
         smartTab1.setPane(tabPane1); 
-  
+        String string = "hola";
         Tab smartTab2 = new Tab("Proveedores");
         Canvas tabPane2 = new Canvas();  
         tabPane2.setWidth100();
