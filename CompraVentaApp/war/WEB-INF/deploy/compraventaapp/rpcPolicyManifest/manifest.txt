@@ -1,0 +1,2 @@
+# Module compraventaapp
+# RPC service class, partial path of RPC policy file
