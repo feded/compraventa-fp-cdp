@@ -1,0 +1,2 @@
+serviceClass: com.compraventaapp.client.GreetingService
+path: ADACC9044516B22852E84D044925B4D0.gwt.rpc

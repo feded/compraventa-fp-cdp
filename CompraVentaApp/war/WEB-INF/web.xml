@@ -8,7 +8,7 @@
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/compraventaapp/greet</url-pattern>
+    <url-pattern>/compraventaapp/compraVentaService</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

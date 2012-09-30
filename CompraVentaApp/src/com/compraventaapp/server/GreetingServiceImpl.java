@@ -1,6 +1,9 @@
 package com.compraventaapp.server;
 
+import java.util.List;
+
 import com.compraventaapp.client.GreetingService;
+import com.compraventaapp.client.model.Persona;
 import com.compraventaapp.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -11,6 +14,12 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
+	private DBManager mgr;
+	
+	public GreetingServiceImpl(){
+		mgr= new DBManager();
+	}
+	
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid. 
 		if (!FieldVerifier.isValidName(input)) {
@@ -44,5 +53,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		}
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
+	}
+
+	@Override
+	public List<Persona> getClientes() throws Exception {
+		return mgr.getPersonas(Persona.TipoPersona.CLIENTE.toInt());
 	}
 }
