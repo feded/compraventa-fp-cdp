@@ -77,7 +77,7 @@ public class DBManager {
 		}
 		return personas;
 	}
-
+	//adri vamos a hav
 	// Persona persona = new Persona();
 	// persona.setNombre("Federico");
 	// persona.setApellido("Daumas");

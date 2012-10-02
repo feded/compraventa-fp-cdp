@@ -1,9 +1,12 @@
 package com.compraventaapp.server;
 
+import java.io.DataInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import com.compraventaapp.client.GreetingService;
 import com.compraventaapp.client.model.Persona;
+import com.compraventaapp.client.model.Producto;
 import com.compraventaapp.client.model.RegistroPago;
 import com.compraventaapp.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -65,4 +68,37 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 	public List<RegistroPago> getPagos() throws Exception {
 		return mgr.getRegistroPagos();
 	}
+	
+	@Override
+	public List<Persona> getProveedores() throws Exception {
+		return mgr.getPersonas(Persona.TipoPersona.PROVEEDOR.toInt());
+	}
+
+	@Override
+	public List<Producto> getProductos() throws Exception {
+		return mgr.getProductos();
+	}
+	
+	@Override
+	public void guardarProducto(Producto producto) throws Exception {
+		if (!mgr.guardarProducto(producto)){
+			throw new Exception("Error al guardar Producto");
+		}
+		
+	}
+
+	@Override
+	public void guardarPersona(Persona persona) throws Exception {
+		if (!mgr.guardarPersona(persona)){
+			throw new Exception("Error al guardar Producto");
+		}
+		
+	}
+
+	@Override
+	public void subirArchivo(InputStream file) throws Exception {
+		mgr.cargarPagos(file);
+		
+	}
+
 }
