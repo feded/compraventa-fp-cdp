@@ -22,7 +22,7 @@ public class PersonaRecord extends ListGridRecord {
 	}
 	
 	public void setApellido(String apellido){
-		setAttribute("nombre", apellido);
+		setAttribute("apellido", apellido);
 	}
 	
 	

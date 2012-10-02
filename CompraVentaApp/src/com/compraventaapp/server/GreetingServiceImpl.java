@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.compraventaapp.client.GreetingService;
 import com.compraventaapp.client.model.Persona;
+import com.compraventaapp.client.model.RegistroPago;
 import com.compraventaapp.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -58,5 +59,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public List<Persona> getClientes() throws Exception {
 		return mgr.getPersonas(Persona.TipoPersona.CLIENTE.toInt());
+	}
+
+	@Override
+	public List<RegistroPago> getPagos() throws Exception {
+		return mgr.getRegistroPagos();
 	}
 }
