@@ -8,6 +8,7 @@ import com.compraventaapp.client.model.Producto;
 import com.compraventaapp.client.model.RegistroPago;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.smartgwt.client.data.DataSource;
 
 /**
  * The client side stub for the RPC service.
@@ -20,6 +21,5 @@ public interface GreetingService extends RemoteService {
 	List<Persona> getProveedores() throws Exception;
 	List<Producto> getProductos() throws Exception;
 	void guardarPersona(Persona persona) throws Exception;
-	void subirArchivo(InputStream file) throws Exception;
 	void guardarProducto(Producto producto) throws Exception;;
 }

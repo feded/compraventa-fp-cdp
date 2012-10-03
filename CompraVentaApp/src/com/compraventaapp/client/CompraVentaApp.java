@@ -1,5 +1,11 @@
 package com.compraventaapp.client;
 
+import gwtupload.client.IFileInput.FileInputType;
+import gwtupload.client.IUploadStatus.Status;
+import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.Utils;
+import gwtupload.client.MultiUploader;
+import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import java.io.InputStream;
 import java.math.BigDecimal;
 
@@ -20,14 +26,23 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.xml.client.Document;
+import com.google.gwt.xml.client.XMLParser;
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.data.DataSourceField;
 import com.smartgwt.client.types.Encoding;
+import com.smartgwt.client.types.FieldType;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ButtonItem;
+import com.smartgwt.client.widgets.form.fields.FileItem;
 import com.smartgwt.client.widgets.form.fields.FormItem;
+import com.smartgwt.client.widgets.form.fields.HiddenItem;
 import com.smartgwt.client.widgets.form.fields.IntegerItem;
 import com.smartgwt.client.widgets.form.fields.SubmitItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
@@ -36,6 +51,7 @@ import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.events.CellSavedEvent;
 import com.smartgwt.client.widgets.grid.events.CellSavedHandler;
+import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 
@@ -120,7 +136,6 @@ public class CompraVentaApp implements EntryPoint {
 		DecoratedTabPanel tabPanel = new DecoratedTabPanel();
 		tabPanel.setWidth("550px");
 		tabPanel.setAnimationEnabled(true);
-
 		VerticalPanel vPanel1 = new VerticalPanel();
 		vPanel1.setSpacing(15);
 		vPanel1.setHeight("500px");
@@ -128,35 +143,89 @@ public class CompraVentaApp implements EntryPoint {
 		saldoItem.setTitle("Saldo");
 		tabPanel.add(vPanel1, "Subir Archivo");
 
-		final DynamicForm uploadForm = new DynamicForm();		
-		uploadForm.setEncoding(Encoding.MULTIPART);
-		UploadItem fileItem = new UploadItem("Archivo");
-		SubmitItem uploadButton = new SubmitItem();
-		uploadButton.setTitle("Subir");
-		uploadButton.addClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+		final DynamicForm uploadForm = new DynamicForm();
+		MultiUploader uploader = new MultiUploader(FileInputType.LABEL);
+		// we can change the internationalization by creating custom Constants
+		// file
+ 
+		uploader.setAvoidRepeatFiles(false);
+ 
+		uploader.setServletPath("file.fileUpload");
+		uploader.addOnFinishUploadHandler(new OnFinishUploaderHandler() {
 			
 			@Override
-			public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent e){
-				GreetingServiceAsync service = (GreetingServiceAsync) GWT
-		                .create(GreetingService.class);
-		        ServiceDefTarget serviceDef = (ServiceDefTarget) service;
-		        serviceDef.setServiceEntryPoint(GWT.getModuleBaseURL()
-		            + "compraVentaService");
-		        UploadFileService subirArchivoCallback = new UploadFileService();
-		        try {
-					
-					service.subirArchivo(((InputStream)uploadForm.getField("Archivo").getValue()), subirArchivoCallback);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			public void onFinish(IUploader uploader) {
+ 
+				if (uploader.getStatus() == Status.SUCCESS) {
+ 
+					String response = uploader.getServerResponse();
+ 
+					if (response != null) {
+						Document doc = XMLParser.parse(response);
+						String message = Utils.getXmlNodeValue(doc, "message");
+						String finished = Utils.getXmlNodeValue(doc, "finished");
+ 
+						Window.alert("Server response: \n" + message + "\n"
+								+ "finished: " + finished);
+					} else {
+						Window.alert("Unaccessible server response");
+					}
+ 
+					// uploader.reset();
+				} else {
+					Window.alert("Uploader Status: \n" + uploader.getStatus());
 				}
+ 
 			}
 		});
-			
-		uploadForm.setItems(fileItem, uploadButton);
-		vPanel1.add(uploadForm);
+ 
+		vPanel1.add(uploader);
+ 
 		
-		tabPanel.add(vPanel1, "Subir Archivo");
+//		VerticalPanel vPanel1 = new VerticalPanel();
+//		vPanel1.setSpacing(15);
+//		vPanel1.setHeight("500px");
+//		IntegerItem saldoItem = new IntegerItem();
+//		saldoItem.setTitle("Saldo");
+//		tabPanel.add(vPanel1, "Subir Archivo");
+//
+//		final DynamicForm uploadForm = new DynamicForm();
+//		DataSource source = new DataSource();
+//		DataSourceField field = new DataSourceField();
+//		field.setType(FieldType.BINARY);
+//		uploadForm.setDataSource(source);
+//		uploadForm.setCanSubmit(true);
+//		uploadForm.setEncoding(Encoding.MULTIPART);
+//		uploadForm.setAction("file.fileUpload");
+//		SubmitItem uploadButton = new SubmitItem();
+//		uploadButton.setTitle("Subir");
+//		uploadButton.addClickHandler(new com.smartgwt.client.widgets.form.fields.events.ClickHandler() {
+//		
+//			@Override
+//			public void onClick(com.smartgwt.client.widgets.form.fields.events.ClickEvent e){
+////				GreetingServiceAsync service = (GreetingServiceAsync) GWT
+////		                .create(GreetingService.class);
+////		        ServiceDefTarget serviceDef = (ServiceDefTarget) service;
+////		        serviceDef.setServiceEntryPoint(GWT.getModuleBaseURL()
+////		            + "compraVentaService");
+////		        UploadFileService subirArchivoCallback = new UploadFileService();
+////		        try {
+////		        	uploadForm.saveData();
+////		        	System.out.println((uploadForm.getField("Archivo").getValue().toString()));
+////					//service.subirArchivo((uploadForm.getField("Archivo").getValue().toString()), subirArchivoCallback);
+////				} catch (Exception e1) {
+////					// TODO Auto-generated catch block
+////					e1.printStackTrace();
+////				}				
+//		        uploadForm.saveData();
+//			}
+//		});
+//			
+//		uploadForm.setItems(uploadButton);
+//		vPanel1.add(uploadForm);
+//		
+//		
+//		tabPanel.add(vPanel1, "Subir Archivo");
 
 		VerticalPanel vPanel2 = new VerticalPanel();
 		vPanel2.setSpacing(15);

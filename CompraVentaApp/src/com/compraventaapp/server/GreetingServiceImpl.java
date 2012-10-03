@@ -1,6 +1,7 @@
 package com.compraventaapp.server;
 
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import com.compraventaapp.client.model.Producto;
 import com.compraventaapp.client.model.RegistroPago;
 import com.compraventaapp.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.smartgwt.client.data.DSRequest;
+import com.smartgwt.client.data.DataSource;
 
 /**
  * The server side implementation of the RPC service.
@@ -95,10 +98,5 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		
 	}
 
-	@Override
-	public void subirArchivo(InputStream file) throws Exception {
-		mgr.cargarPagos(file);
-		
-	}
 
 }

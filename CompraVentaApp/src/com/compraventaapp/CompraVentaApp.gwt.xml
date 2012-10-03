@@ -9,6 +9,7 @@
   <inherits name='com.google.gwt.user.theme.clean.Clean'/>
   <inherits name='com.google.gwt.user.theme.standard.Standard'/>
   <inherits name='com.smartgwt.SmartGwt'/>
+   <inherits name="gwtupload.GWTUpload"/>
   <!--<inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!--<inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
@@ -20,5 +21,4 @@
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>
- 
 </module>

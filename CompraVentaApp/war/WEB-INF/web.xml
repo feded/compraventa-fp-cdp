@@ -12,19 +12,17 @@
   </servlet-mapping>
   
   
-   <servlet>
-   <servlet-name>upload</servlet-name>
-   <servlet-class>com.compraventaapp.server.SubirArchivoServlet</servlet-class>
+ <servlet>
+ <servlet-name>fileUploadServlet</servlet-name>
+ <servlet-class>com.compraventaapp.server.SubirArchivoServlet</servlet-class>
  </servlet>
-
-
+ 
  <servlet-mapping>
-   <servlet-name>upload</servlet-name>
-   <url-pattern>/archivoPago</url-pattern>
+ <servlet-name>fileUploadServlet</servlet-name>
+ <url-pattern>*.fileUpload</url-pattern>
  </servlet-mapping>
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
+
+ <welcome-file-list>
     <welcome-file>CompraVentaApp.html</welcome-file>
   </welcome-file-list>
 

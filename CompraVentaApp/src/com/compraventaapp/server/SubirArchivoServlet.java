@@ -1,43 +1,54 @@
 package com.compraventaapp.server;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import gwtupload.server.UploadAction;
+import gwtupload.server.exceptions.UploadActionException;
+ 
+import java.util.List;
+ 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-public class SubirArchivoServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
+ 
+import org.apache.commons.fileupload.FileItem;
+ 
+public class SubirArchivoServlet extends UploadAction {
+ 
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(req, resp);
+	DBManager mgr = new DBManager();
+	public String executeAction(HttpServletRequest request,
+			List<FileItem> sessionFiles) throws UploadActionException {
+		String response = "Received file:";
+ 
+		for (FileItem item : sessionFiles) {
+			if (!item.isFormField()) {
+				try {
+ 
+					// we can save the received file
+					// File file = File.createTempFile("receivedFile", ".tmp",
+					// new File("C:\\"));
+					// item.write(file);
+ 
+					// response += " " + file.getPath();
+ 
+					response += " " + item.getName() + ", size=  "
+					+ item.getSize() + ", ContentType= "
+					+ item.getContentType();
+					mgr.cargarPagos(item.getInputStream());
+					
+ 
+				} catch (Exception e) {
+					throw new UploadActionException(e.getMessage());
+				}
+			}
+		}
+ 
+		try {
+			// Remove files from session
+			removeSessionFileItems(request);
+		} catch (Exception e) {
+			throw new UploadActionException(e.getMessage());
+		}
+ 
+		// Send information of the received files to the client.
+		return response;
 	}
-
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(req, resp);
-	}
-	
-	private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		  
-		InputStream  in = new DataInputStream(req.getInputStream());   
-		DBManager mgr = new DBManager();
-		mgr.cargarPagos(in);
-	}
-
+ 
 }
