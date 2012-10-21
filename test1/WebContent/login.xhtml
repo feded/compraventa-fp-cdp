@@ -1,0 +1,15 @@
+<html lang="en"
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+<title>Pagina de acceso al sistema</title>
+</h:head>
+<h:body>
+	<h:messages style="color:red" layout="list" showDetail="true"/>
+	<h:form>
+		Usuario: <h:inputText id="username" value="#{loginBean.usuario}" /> <br/>
+		Contrasenha: <h:inputSecret id="password" value="#{loginBean.contrasenha}"/><br/>
+		<h:commandButton action="#{loginBean.login}" value="Ingresar"/>
+	</h:form>
+</h:body>
+</html>

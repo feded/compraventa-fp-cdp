@@ -1,0 +1,103 @@
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+	
+<h:head>
+<title>Venta</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+<ui:include src="/paginaPrincipal.xhtml" />
+<h:form id="form">
+
+    <p:growl id="msgs" />
+
+	<p:panel header="Nueva Venta">
+		<h:panelGrid columns="4" id="grid">
+			
+			<h:outputLabel value="Fecha : *" for="fecha"></h:outputLabel>
+			<p:calendar value="#{ventaBean.venta.fecha}" id="fecha" showButtonPanel="true"/>  
+	
+			<h:outputText value="Cliente : "></h:outputText>
+			<p:selectOneMenu  value="#{ventaBean.codCliente}" effect="fold" editable="true"> 
+	            <f:selectItems var="cliente" itemLabel="#{cliente.codPersona}-#{cliente.nombre} #{cliente.apellido}" value="#{ventaBean.clientes}" />  
+	        </p:selectOneMenu>
+		        
+		  </h:panelGrid>
+          
+          <h:panelGrid columns="2" id="grid2">	
+          	<h:outputText value="Producto : " for="producto"></h:outputText>
+			<p:selectOneMenu  value="#{ventaBean.codProducto}" effect="fold" editable="true"> 
+	            <f:selectItems var="producto" itemLabel="#{producto.codProducto}-#{producto.nombre}" itemValue="#{producto.codProducto}" value="#{ventaBean.productos}" />  
+	        </p:selectOneMenu>
+			<h:outputLabel value="Precio de Venta : *" for="precioVenta"></h:outputLabel>
+			<p:spinner id="precioVenta"  value="#{ventaBean.venta.detalle.precio}" />
+			
+			<h:outputLabel value="Cantidad : *" for="cantidad"></h:outputLabel>
+			<p:spinner id="cantidad"  value="#{ventaBean.venta.detalle.cantidad}"/>
+			 
+			 
+			 <p:commandButton id="btn_add" value="Agregar"
+					update="ventas msgs @parent total" action="#{ventaBean.reinit}">
+				</p:commandButton>
+		
+		</h:panelGrid>
+		
+		
+			
+	</p:panel>
+	 <p:outputPanel id="ventas">  
+        <p:dataTable id="ventasTable" value="#{ventaBean.venta.detalles}" var="det">  
+  			
+            <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Cantidad" />  
+                </f:facet>  
+                <h:outputText value="#{det.cantidad}" />  
+            </p:column>  
+  
+            <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Descripción" />  
+                </f:facet>  
+                <h:outputText value="#{det.producto.descripcion}" />  
+            </p:column>  
+  
+   			 <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Precio" />  
+                </f:facet>  
+                <h:outputText value="#{det.precio}" />  
+            </p:column>  
+            
+            <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Operación" />  
+                </f:facet>  
+                <p:commandLink value="Remover" update="ventasTable">
+						<f:setPropertyActionListener target="#{ventaBean.seleccionado}"
+							value="#{det}"></f:setPropertyActionListener>
+					</p:commandLink>
+            </p:column>  
+  
+        </p:dataTable>  
+    </p:outputPanel>
+    <p:panel >
+    	<h:panelGrid  columns="6">
+    		<h:outputLabel value="Total : "  />
+            <h:outputText id="total" value="#{ventaBean.total}" />  
+    	
+    	
+    	<p:commandButton value="Guardar Venta"  update="form msgs"  
+                            action="#{ventaBean.insertarVenta}" >  
+        </p:commandButton>
+        
+        </h:panelGrid>
+    	
+    </p:panel>  
+</h:form>
+</h:body>
+</html>

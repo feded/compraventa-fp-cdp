@@ -1,0 +1,101 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+<h:head>
+	<title>Compra</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+<ui:include src="/paginaPrincipal.xhtml" />
+	<h:form id="form">
+
+		<p:growl id="msgs" />
+
+		<p:panel header="Nueva Compra">
+			<h:panelGrid columns="4" id="grid">
+
+				<h:outputLabel value="Fecha : *" for="fecha"></h:outputLabel>
+				<p:calendar value="#{compraBean.compra.fecha}" id="fecha"
+					showButtonPanel="true" />
+
+				<h:outputText value="Proveedor : "></h:outputText>
+				<p:selectOneMenu  value="#{compraBean.codProveedor}" effect="fold" editable="true"> 
+		            <f:selectItems var="proveedor" itemLabel="#{proveedor.codPersona}-#{proveedor.nombre} #{proveedor.apellido}" value="#{compraBean.proveedores}" />  
+		        </p:selectOneMenu>
+
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2" id="grid2">
+				<h:outputText value="Producto : " for="producto"></h:outputText>
+				<p:selectOneMenu  value="#{compraBean.codProducto}" effect="fold" editable="true"> 
+		            <f:selectItems var="producto" itemLabel="#{producto.codProducto}-#{producto.nombre}" itemValue="#{producto.codProducto}" value="#{compraBean.productos}" />  
+		        </p:selectOneMenu>
+		        
+				<h:outputLabel value="Precio de Compra : *" for="precioCompra"></h:outputLabel>
+				<p:spinner id="precioCompra"
+					value="#{compraBean.compra.detalle.precio}" />
+
+				<h:outputLabel value="Cantidad : *" for="cantidad"></h:outputLabel>
+				<p:spinner id="cantidad"
+					value="#{compraBean.compra.detalle.cantidad}" />
+
+				<p:commandButton id="btn_add" value="Agregar"
+					update="compras msgs @parent total" action="#{compraBean.reinit}">
+				</p:commandButton>
+
+			</h:panelGrid>
+			
+		</p:panel>
+		<p:outputPanel id="compras">
+			<p:dataTable id="comprasTable" value="#{compraBean.compra.detalles}"
+				var="det">
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Cantidad" />
+					</f:facet>
+					<h:outputText value="#{det.cantidad}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descripción" />
+					</f:facet>
+					<h:outputText value="#{det.producto.descripcion}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Precio" />
+					</f:facet>
+					<h:outputText value="#{det.precio}" />
+				</p:column>
+
+
+				<p:column headerText="Operaciones">
+					<p:commandLink value="Remover" update="comprasTable">
+						<f:setPropertyActionListener target="#{compraBean.seleccionado}"
+							value="#{det}"></f:setPropertyActionListener>
+					</p:commandLink>
+				</p:column>
+
+			</p:dataTable>
+		</p:outputPanel>
+		<p:panel>
+			<h:panelGrid columns="6">
+				<h:outputLabel value="Total : " />
+				<h:outputText id="total" value="#{compraBean.total}" />
+
+
+				<p:commandButton value="Guardar Compra"
+					action="#{compraBean.insertarCompra}" update="form msgs">
+				</p:commandButton>
+
+			</h:panelGrid>
+
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

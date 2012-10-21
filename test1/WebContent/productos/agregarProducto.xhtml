@@ -1,0 +1,37 @@
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+<h:head>
+<title>Agregar Producto</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+<ui:include src="/paginaPrincipal.xhtml" />
+<h:form id="form">  
+	 <p:growl id="messages" showDetail="true"/> 
+    <p:panel header="Producto Nuevo" toggleable="true" id="panel" >  
+        <h:panelGrid columns="2" cellpadding="5">  
+ 
+            <h:outputLabel value="Nombre :" for="nombre" />  
+            <p:inputText  id="nombre" value="#{productoBean.name}"/>  
+            
+            <h:outputLabel value="Descripción :" for="descripcion" />  
+            <p:inputText  id="descripcion" value="#{productoBean.descripcion}"/>
+            
+            <h:outputLabel value="Precio Venta :" for="precio" />  
+            <p:inputText  id="precio" value="#{productoBean.precio}"/>    
+                      
+            <h:outputLabel value="Existencia :" for="existencia" />  
+            <p:inputText  id="existencia" value="#{productoBean.existencia}"/>  
+        </h:panelGrid>  
+    </p:panel>  
+      
+    <p:commandButton  value="Aceptar" id="submit" update="form messages"  action="#{productoBean.guardarProducto}" />  
+    <p:commandButton value="Cancelar" action="#{productoBean.setearANull}" update="messages"  />  
+   
+      
+</h:form>  
+</h:body>
+</html>

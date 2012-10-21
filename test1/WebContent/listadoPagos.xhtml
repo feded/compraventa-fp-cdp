@@ -1,0 +1,77 @@
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+<h:head>
+<title>Listado de Pagos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+<ui:include src="/paginaPrincipal.xhtml" />
+
+    <p:growl id="messages" showDetail="true"/>  
+  
+    <p:dataTable var="pago" value="#{listadoPagosBean.registroPagos}" id="pagoList" editable="false" emptyMessage="No se encontraron Pagos.">  
+  
+        <f:facet name="header">  
+           Pagos
+        </f:facet>  
+  
+        <p:column headerText="Cod. Pago" style="width:125px">  
+            
+                 
+                    <h:outputText value="#{pago.codPago}" />  
+                 
+                
+           
+        </p:column> 
+        
+        <p:column headerText="Cod. Cliente" style="width:125px">  
+             
+               
+                    <h:outputText value="#{pago.codPersona}" />  
+              
+                  
+            
+        </p:column>   
+  
+        <p:column headerText="Fecha" style="width:125px">  
+            
+              
+                    <h:outputFormat converter="javax.faces.DateTime" value="#{pago.fecha}" />  
+                
+               
+            
+        </p:column>  
+          <p:column headerText="Monto" style="width:125px">  
+            
+                
+                    <h:outputText value="#{pago.monto}" />  
+                
+               
+            
+        </p:column> 
+        
+      
+          <p:column headerText="Estado" style="width:125px">  
+            
+               
+                    <h:outputText value="#{pago.estado}" />  
+              
+           
+        </p:column>
+        <p:column headerText="Tipo Pago" style="width:125px">  
+            
+               
+                    <h:outputText value="#{pago.tipo}" />  
+              
+           
+        </p:column>
+  
+        
+    </p:dataTable>  
+    
+</h:body>
+</html>

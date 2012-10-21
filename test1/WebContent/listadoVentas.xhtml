@@ -1,0 +1,55 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Listado de Ventas</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+	<ui:include src="/paginaPrincipal.xhtml" />
+	<h:form id="form">
+
+		<p:growl id="messages" showDetail="true" />
+
+		<p:dataTable var="venta" value="#{listadoVentasBean.ventas}"
+			id="ventaList" emptyMessage="No se encontraron Ventas.">
+
+			<f:facet name="header">  
+	           Ventas
+	        </f:facet>
+			<p:column headerText="Nro de Factura" style="width:125px">
+				<h:outputText value="#{venta.nroFactura}" />
+			</p:column>
+			<p:column headerText="Fecha" style="width:125px">
+				<h:outputFormat converter="javax.faces.DateTime"
+					value="#{venta.fecha}" />
+			</p:column>
+			<p:column headerText="Nombre" style="width:125px">
+				<h:outputText value="#{venta.cliente.nombre}" />
+			</p:column>
+			<p:column headerText="Apellido" style="width:125px">
+				<h:outputText value="#{venta.cliente.apellido}" />
+			</p:column>
+			<p:column headerText="Detalles">
+				<p:dataTable style="width:80%; margin:auto;" var="detalle" value="#{venta.detalles}"
+				id="detalles" emptyMessage="No se encontraron detalles.">
+				<p:column headerText="Producto">
+					<h:outputText value="#{detalle.producto.nombre}" />
+				</p:column>
+				<p:column headerText="Precio">
+					<h:outputText value="#{detalle.precio}" />
+				</p:column>
+				<p:column headerText="Cantidad">
+					<h:outputText value="#{detalle.cantidad}" />
+				</p:column>
+			</p:dataTable>
+			</p:column>
+			
+
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+</html>

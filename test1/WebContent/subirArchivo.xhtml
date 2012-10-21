@@ -1,0 +1,27 @@
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+<h:head>
+<title>Archivos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+<ui:include src="/paginaPrincipal.xhtml" />
+<h:form enctype="multipart/form-data">  
+	<p:fileUpload label="Seleccione un Archivo"  
+			style="width:50%; margin: auto;"
+			
+			fileUploadListener="#{pagosBean.subirArchivo}"  
+            mode="advanced"  
+            update="messages"  
+            auto="true"  
+            
+            sizeLimit="100000000"   
+            allowTypes="/(\.|\/)(txt)$/"/> 
+            
+	<p:growl id="messages" showDetail="true"/>
+	</h:form>
+</h:body>
+</html>

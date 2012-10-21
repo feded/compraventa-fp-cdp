@@ -1,0 +1,34 @@
+<ui:composition lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+<h:head>
+<title>Pagina principal del sistema</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+<h:form style="padding-bottom:70px;">  
+
+   <p:growl id="messagesp" showDetail="true"/> 
+	<p:dock position="top" maxWidth="60" itemWidth="60" >    
+		   <p:menuitem value="Clientes" icon="/images/Cliente.png" url="/faces/clientes/agregarCliente.xhtml"/>
+		   <p:menuitem value="Listar Clientes" icon="/images/Listar.png" url="/faces/clientes/listadoClientes.xhtml"/>
+		   <p:menuitem value="Proveedores" icon="/images/Proveedor.png" url="/faces/proveedores/agregarProveedor.xhtml"/>  
+		   <p:menuitem value="Listar Proveedores" icon="/images/Listar.png" url="/faces/proveedores/listadoProveedores.xhtml"/>
+		   <p:menuitem value="Productos" icon="/images/Producto.png" url="/faces/productos/agregarProducto.xhtml"/>  
+		   <p:menuitem value="Listar Productos" icon="/images/Listar.png" url="/faces/productos/listadoProductos.xhtml"/>
+		   <p:menuitem value="Comprar" icon="/images/Comprar.png" url="/faces/compra.xhtml"/>
+		   <p:menuitem value="Listar Compras" icon="/images/Listar.png" url="/faces/listadoCompras.xhtml"/>  
+		   <p:menuitem value="Vender" icon="/images/Vender.png" url="/faces/venta.xhtml"/>
+		   <p:menuitem value="Listar Ventas" icon="/images/Listar.png" url="/faces/listadoVentas.xhtml" />
+		   <p:menuitem value="Archivo de Pagos" icon="/images/Archivo.png" url="/faces/subirArchivo.xhtml" />  
+		   <p:menuitem value="Registro de Pagos" icon="/images/Pagos.png" url="/faces/listadoPagos.xhtml"/>
+		   <p:menuitem value="Inicio" icon="/images/Home.png" url="/faces/paginaPrincipal.xhtml" />  
+	</p:dock>
+	
+	
+    </h:form>
+
+</h:body>
+</ui:composition>

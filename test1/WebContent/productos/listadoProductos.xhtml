@@ -1,0 +1,89 @@
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+<h:head>
+<title>Listado de Productos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+<ui:include src="/paginaPrincipal.xhtml" />
+<h:form id="form">  
+  
+    <p:growl id="messages" showDetail="true"/>  
+  
+    <p:dataTable var="producto" value="#{listadoProductosBean.productos}" id="productosList" editable="true" emptyMessage="No se encontraron Productos.">  
+  
+        <f:facet name="header">  
+           Productos
+        </f:facet>  
+  
+        <p:ajax event="rowEdit" listener="#{listadoProductosBean.onEdit}" update=":form:messages" />  
+        <p:ajax event="rowEditCancel" listener="#{listadoProductosBean.onCancel}" update=":form:messages" />  
+  
+        <p:column headerText="Código de Producto" style="width:125px">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{producto.codProducto}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText  value="#{producto.codProducto}" disabled="true" style="width:100%"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column> 
+        
+        <p:column headerText="Nombre" style="width:125px">  
+            <p:cellEditor>  	
+                <f:facet name="output">  
+                    <h:outputText value="#{producto.nombre}" />  
+                </f:facet>  
+                <f:facet name="input" >  
+                    <p:inputText value="#{producto.nombre}" style="width:100%" label="Nombre"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>   
+  
+        <p:column headerText="Descripción" style="width:125px">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{producto.descripcion}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{producto.descripcion}" style="width:100%" label="Descripcion"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+  
+        <p:column headerText="Precio" style="width:125px">  
+           <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{producto.precio}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{producto.precio}" style="width:100%" label="Precio"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>
+        
+        <p:column headerText="Cantidad" style="width:125px">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{producto.cantidad}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{producto.cantidad}" style="width:100%" label="Cantidad"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+    
+  	 <p:column  headerText="Editar/Eliminar" style="width:50px">  
+            <p:rowEditor>  </p:rowEditor> 
+        </p:column>  
+  
+    </p:dataTable>  
+  
+</h:form>  
+</h:body>
+</html>

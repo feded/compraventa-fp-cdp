@@ -1,0 +1,41 @@
+<ui:composition lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+<h:head>
+<title>Agregar Cliente</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+<ui:include src="/paginaPrincipal.xhtml" />
+<h:form id="form">  
+	 <p:growl id="messages" showDetail="true"/> 
+    <p:panel header="Cliente Nuevo" toggleable="true" id="panel" >  
+        <h:panelGrid columns="2" cellpadding="5">  
+           <h:outputLabel value="CI/RUC :" for="ciruc" />  
+            <p:inputText  id="ciruc" value="#{personaBean.ciruc}" />  
+  
+            <h:outputLabel value="Nombre :" for="nombre" />  
+            <p:inputText  id="nombre" value="#{personaBean.nombre}"/>
+              
+            <h:outputLabel value="Apellido :" for="apellido" />  
+            <p:inputText  id="apellido" value="#{personaBean.apellido}"/>  
+              
+            <h:outputLabel value="Dirección :" for="direccion" />  
+            <p:inputText  id="direccion" value="#{personaBean.direccion}"/>  
+                      
+            <h:outputLabel value="Teléfono :" for="telefono" />  
+            <p:inputText  id="telefono" value="#{personaBean.telefono}"/>  
+            
+            <h:outputLabel value="Saldo Disponible :" for="saldoDisponible" />  
+            <p:inputText  id="saldoDisponible" value="#{personaBean.saldoDisponible}"/>  
+        </h:panelGrid>  
+    </p:panel>  
+      
+    <p:commandButton  value="Aceptar" id="submit" update="form messages"  action="#{personaBean.guardarCliente}" />  
+    <p:commandButton value="Cancelar" action="#{personaBean.setearANull}" update="messages"  />  
+      
+</h:form>  
+</h:body>
+</ui:composition>

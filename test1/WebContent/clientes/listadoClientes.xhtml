@@ -1,0 +1,111 @@
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"  
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+<h:head>
+<title>Listado de Clientes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+<ui:include src="/paginaPrincipal.xhtml" />
+<h:form id="form">  
+  
+    <p:growl id="messages" showDetail="true"/>  
+  
+    <p:dataTable var="persona" value="#{listadoClientesBean.personas}" id="clientesList" editable="true" emptyMessage="No se encontraron Clientes.">  
+  
+        <f:facet name="header">  
+           Clientes
+        </f:facet>  
+  
+        <p:ajax event="rowEdit" listener="#{listadoClientesBean.onEdit}" update=":form:messages" />  
+        <p:ajax event="rowEditCancel" listener="#{listadoClientesBean.onCancel}" update=":form:messages" />  
+  
+        <p:column headerText="Código de Cliente" style="width:125px">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{persona.codPersona}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText  value="#{persona.codPersona}" disabled="true" style="width:100%"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column> 
+        
+        <p:column headerText="Número de Documento" style="width:125px">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{persona.numeroDocumento}" />  
+                </f:facet>  
+                <f:facet name="input" >  
+                    <p:inputText value="#{persona.numeroDocumento}" disabled="true" style="width:100%"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>   
+  
+        <p:column headerText="Nombre" style="width:125px">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{persona.nombre}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{persona.nombre}" style="width:100%" label="Nombre"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+  
+        <p:column headerText="Apellido" style="width:125px">  
+           <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{persona.apellido}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{persona.apellido}" style="width:100%" label="Apellido"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>
+        
+        <p:column headerText="Direccion" style="width:125px">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{persona.direccion}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{persona.direccion}" style="width:100%" label="Direccion"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+  
+        <p:column headerText="Teléfono" style="width:125px">  
+           <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{persona.telefono}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{persona.telefono}" style="width:100%" label="Teléfono"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>    
+  
+        <p:column headerText="Saldo Disponible" style="width:125px">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{persona.saldoDisponible}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{persona.saldoDisponible}" disabled="true" style="width:100%" label="Saldo Disponible"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+  
+        <p:column  headerText="Editar/Eliminar" style="width:50px">  
+            <p:rowEditor>  </p:rowEditor> 
+        </p:column>  
+        
+    </p:dataTable>  
+    
+</h:form>  
+</h:body>
+</html>
