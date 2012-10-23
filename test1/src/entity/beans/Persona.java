@@ -1,5 +1,6 @@
-package py.edu.una.pol.pw.beans;
+package entity.beans;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -12,7 +13,12 @@ import org.hibernate.annotations.Check;
 
 @Entity
 @Check(constraints =  "saldoDisponible >= 0")
-public class Persona {
+public class Persona implements Serializable{
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	public enum TipoPersona{
 		PROVEEDOR, CLIENTE;

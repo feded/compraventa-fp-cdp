@@ -6,9 +6,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import py.edu.una.pol.pw.beans.Persona;
-import py.edu.una.pol.pw.beans.Persona.TipoPersona;
 import py.edu.una.pol.pw.manager.DBManager;
+import entity.beans.Persona;
+import entity.beans.Persona.TipoPersona;
   
 @ManagedBean
 public class PersonaBean {  

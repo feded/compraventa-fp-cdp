@@ -1,8 +1,10 @@
-package py.edu.una.pol.pw.beans;
+package entity.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +18,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
 
-import py.edu.una.pol.pw.beans.Persona.TipoPersona;
+import entity.beans.Persona.TipoPersona;
 
 @Entity
-public class Venta {
+public class Venta implements Serializable{
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

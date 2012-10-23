@@ -8,8 +8,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
-import py.edu.una.pol.pw.beans.RegistroPago;
 import py.edu.una.pol.pw.manager.DBManager;
+import entity.beans.RegistroPago;
   
 @ManagedBean  
 public class ListadoPagosBean{  

@@ -8,12 +8,11 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
 import org.primefaces.event.RowEditEvent;
 
-
-
-import py.edu.una.pol.pw.beans.Producto;
 import py.edu.una.pol.pw.manager.DBManager;
+import entity.beans.Producto;
   
 @ManagedBean  
 public class ListadoProductosBean{  

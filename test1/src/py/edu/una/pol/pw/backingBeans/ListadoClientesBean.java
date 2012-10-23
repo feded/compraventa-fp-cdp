@@ -2,14 +2,20 @@ package py.edu.una.pol.pw.backingBeans;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import org.primefaces.event.RowEditEvent;
 
-import py.edu.una.pol.pw.beans.Persona;
-import py.edu.una.pol.pw.beans.Persona.TipoPersona;
 import py.edu.una.pol.pw.manager.DBManager;
+import session.beans.Listados;
+import session.beans.ListadosRemote;
+import entity.beans.Persona;
   
 @ManagedBean  
 public class ListadoClientesBean{  
@@ -18,7 +24,11 @@ public class ListadoClientesBean{
 	
 	private List<Persona> personas;
 	
+	@EJB 
+	ListadosRemote listadosBean;
 	
+	
+
   
     public List<Persona> getPersonas() {
 		return personas;
@@ -29,8 +39,19 @@ public class ListadoClientesBean{
 	}
 
 	public ListadoClientesBean() {  
-    	dbmgr = new DBManager();
-    	personas = dbmgr.getPersonas(TipoPersona.CLIENTE.toInt());
+		
+		Context context;
+		  try {
+		   context = new InitialContext();
+		   ListadosRemote listadosBean = (ListadosRemote) context
+		     .lookup("java:app/test1/Listados!session.beans.ListadosRemote");
+		   personas = listadosBean.getClientes();
+		  } catch (NamingException e) {
+		   e.printStackTrace();
+		  }
+		
+    	//dbmgr = new DBManager();
+    	//personas = dbmgr.getPersonas(TipoPersona.CLIENTE.toInt());
     }  
   
   

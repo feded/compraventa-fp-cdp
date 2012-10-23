@@ -18,8 +18,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityResult;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.TypedQuery;
@@ -30,14 +28,13 @@ import javax.persistence.criteria.Root;
 
 import org.primefaces.model.UploadedFile;
 
-
-import py.edu.una.pol.pw.beans.Compra;
-import py.edu.una.pol.pw.beans.CompraDetalle;
-import py.edu.una.pol.pw.beans.Persona;
-import py.edu.una.pol.pw.beans.Producto;
-import py.edu.una.pol.pw.beans.RegistroPago;
-import py.edu.una.pol.pw.beans.Venta;
-import py.edu.una.pol.pw.beans.VentaDetalle;
+import entity.beans.Compra;
+import entity.beans.CompraDetalle;
+import entity.beans.Persona;
+import entity.beans.Producto;
+import entity.beans.RegistroPago;
+import entity.beans.Venta;
+import entity.beans.VentaDetalle;
 
 @SqlResultSetMapping(entities = @EntityResult(entityClass = Persona.class), name = "Clientes")
 public class DBManager {

@@ -9,14 +9,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import py.edu.una.pol.pw.beans.Compra;
-import py.edu.una.pol.pw.beans.CompraDetalle;
-import py.edu.una.pol.pw.beans.Persona;
-import py.edu.una.pol.pw.beans.Venta;
-import py.edu.una.pol.pw.beans.VentaDetalle;
-import py.edu.una.pol.pw.beans.Persona.TipoPersona;
-import py.edu.una.pol.pw.beans.Producto;
 import py.edu.una.pol.pw.manager.DBManager;
+import entity.beans.Compra;
+import entity.beans.CompraDetalle;
+import entity.beans.Persona;
+import entity.beans.Persona.TipoPersona;
+import entity.beans.Producto;
   
 @ManagedBean
 @SessionScoped

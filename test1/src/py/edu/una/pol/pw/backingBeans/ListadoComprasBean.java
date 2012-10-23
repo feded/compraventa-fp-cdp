@@ -7,8 +7,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
-import py.edu.una.pol.pw.beans.Compra;
 import py.edu.una.pol.pw.manager.DBManager;
+import entity.beans.Compra;
   
 @ManagedBean  
 public class ListadoComprasBean{  

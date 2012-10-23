@@ -1,4 +1,4 @@
-package py.edu.una.pol.pw.beans;
+package entity.beans;
 
 import java.io.Serializable;
 import java.lang.String;
