@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
+
 import entity.beans.Persona;
 import entity.beans.Persona.TipoPersona;
 import entity.beans.Producto;

@@ -11,7 +11,7 @@ import javax.naming.NamingException;
 
 import session.beans.ProductoLocal;
 import entity.beans.Producto;
-  
+
 @ManagedBean
 public class ProductoBean {  
   
@@ -23,7 +23,7 @@ public class ProductoBean {
    
     
     public ProductoBean() {
-        
+
     }
     
     
@@ -32,8 +32,7 @@ public class ProductoBean {
     }
 
     public void setCodigo(String codigo) {
-   
-    	this.codigo = codigo;
+        this.codigo = codigo;
     }
 
     
@@ -80,8 +79,8 @@ public class ProductoBean {
     }
  
     private String guardarProducto(Producto producto){
-    	//DBManager mgr = new DBManager();
-    
+    	
+    	
     	producto.setNombre(this.getName());
     	producto.setDescripcion(this.getDescripcion());
     	producto.setPrecio(this.getPrecio());
@@ -95,7 +94,6 @@ public class ProductoBean {
 		  } catch (NamingException e) {
 		   e.printStackTrace();
 		  }
-    	//mgr.guardarProducto(producto);
     	FacesMessage msg = new FacesMessage("Guardado con Éxito", this.getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);
         setearANull();

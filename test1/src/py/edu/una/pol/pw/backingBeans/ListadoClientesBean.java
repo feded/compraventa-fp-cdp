@@ -22,6 +22,7 @@ public class ListadoClientesBean{
 	private List<Persona> personas;
 	
 
+  
     public List<Persona> getPersonas() {
 		return personas;
 	}

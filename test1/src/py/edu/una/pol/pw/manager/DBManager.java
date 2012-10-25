@@ -223,7 +223,7 @@ public class DBManager {
 						regPago.setCodPago(codPago);
 						regPago.setEstado(1);
 						regPago.setMensaje("OK");
-						regPago.setCodPersona(persona.getCodPersona());
+						regPago.setCodPersona(""+persona.getCodPersona());
 						regPago.setFecha(fechaPago);
 						regPago.setMonto(pago);
 						regPago.setTipo("Archivo");
@@ -253,7 +253,7 @@ public class DBManager {
 					regPago.setCodPago("ErrorPago - " + System.currentTimeMillis()); 
 					regPago.setEstado(-1);
 					regPago.setMensaje("Error Saldo menor al pago: " + persona.getSaldoDisponible());
-					regPago.setCodPersona(persona.getCodPersona());
+					regPago.setCodPersona(""+persona.getCodPersona());
 					regPago.setFecha(new Date(System.currentTimeMillis()));
 					regPago.setMonto(pago);
 					regPago.setTipo("Archivo");
@@ -446,7 +446,7 @@ public class DBManager {
 					regPago.setCodPago(montoTotal.toString()); // venta.codVenta deberia de ser.. =S
 					regPago.setEstado(1);
 					regPago.setMensaje("OK");
-					regPago.setCodPersona(cliente.getCodPersona());
+					regPago.setCodPersona(""+cliente.getCodPersona());
 					regPago.setFecha(new Date(System.currentTimeMillis()));
 					regPago.setMonto(montoTotal);
 					regPago.setTipo("Web");
@@ -467,7 +467,7 @@ public class DBManager {
 				regPago.setCodPago("ErrorPago - " + System.currentTimeMillis()); 
 				regPago.setEstado(-1);
 				regPago.setMensaje("Error Saldo menor al pago: " + cliente.getSaldoDisponible());
-				regPago.setCodPersona(cliente.getCodPersona());
+				regPago.setCodPersona(""+cliente.getCodPersona());
 				regPago.setFecha(new Date(System.currentTimeMillis()));
 				regPago.setMonto(montoTotal);
 				regPago.setTipo("Web");
