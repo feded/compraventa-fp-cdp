@@ -18,8 +18,8 @@ public class Producto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String codProducto;
+	@GeneratedValue(strategy=GenerationType.TABLE)
+	private Integer codProducto;
 	@Column
 	private BigDecimal cantidad;
 	@Column
@@ -30,10 +30,10 @@ public class Producto implements Serializable{
 	private BigDecimal precio;
 	
 	
-	public String getCodProducto() {
+	public Integer getCodProducto() {
 		return codProducto;
 	}
-	public void setCodProducto(String codProducto) {
+	public void setCodProducto(Integer codProducto) {
 		this.codProducto = codProducto;
 	}
 	

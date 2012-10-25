@@ -5,8 +5,11 @@ import java.math.BigDecimal;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
-import py.edu.una.pol.pw.manager.DBManager;
+import session.beans.ProductoLocal;
 import entity.beans.Producto;
   
 @ManagedBean
@@ -29,7 +32,8 @@ public class ProductoBean {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+   
+    	this.codigo = codigo;
     }
 
     
@@ -76,12 +80,22 @@ public class ProductoBean {
     }
  
     private String guardarProducto(Producto producto){
-    	DBManager mgr = new DBManager();
+    	//DBManager mgr = new DBManager();
+    
     	producto.setNombre(this.getName());
     	producto.setDescripcion(this.getDescripcion());
     	producto.setPrecio(this.getPrecio());
     	producto.setCantidad(this.getExistencia());
-    	mgr.guardarProducto(producto);
+    	Context context;
+		  try {
+		   context = new InitialContext();
+		   ProductoLocal productoBean = (ProductoLocal) context
+		     .lookup("java:app/test1/Producto!session.beans.ProductoLocal");
+		     productoBean.guardarProducto(producto);
+		  } catch (NamingException e) {
+		   e.printStackTrace();
+		  }
+    	//mgr.guardarProducto(producto);
     	FacesMessage msg = new FacesMessage("Guardado con Éxito", this.getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);
         setearANull();

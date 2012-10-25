@@ -20,10 +20,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-3.4.RC1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.faces-2.1.11.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.faces-2.1.11.jar" sourcepath="C:/Users/Adriana/.m2/repository/org/glassfish/javax.faces/2.1.11/javax.faces-2.1.11-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate/jboss-logging-3.1.0.GA.jar" sourcepath="C:/Users/Adriana/.m2/repository/org/jboss/logging/jboss-logging/3.1.0.GA/jboss-logging-3.1.0.GA-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cupertino-1.0.8.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-9.1-902.jdbc4.jar"/>
@@ -34,11 +34,5 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate/hibernate-commons-annotations-4.0.1.Final.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate/hibernate-core-4.1.6.Final.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.4.1 - Juno">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-			<attribute name="owner.project.facets" value="jpt.jpa"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

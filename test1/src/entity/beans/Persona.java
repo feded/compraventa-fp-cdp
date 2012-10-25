@@ -47,8 +47,8 @@ public class Persona implements Serializable{
 	}
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String codPersona;
+	@GeneratedValue(strategy=GenerationType.TABLE)
+	private Integer codPersona;
 	@Column //esto no hace falta poner
 	private String numeroDocumento;
 	@Column
@@ -66,10 +66,10 @@ public class Persona implements Serializable{
 	
 	
 	
-	public String getCodPersona() {
+	public Integer getCodPersona() {
 		return codPersona;
 	}
-	public void setCodPersona(String codPersona) {
+	public void setCodPersona(Integer codPersona) {
 		this.codPersona = codPersona;
 	}
 	public String getNumeroDocumento() {

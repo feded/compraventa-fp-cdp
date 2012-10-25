@@ -5,8 +5,12 @@ import java.math.BigDecimal;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
-import py.edu.una.pol.pw.manager.DBManager;
+import session.beans.PersonaLocal;
+
 import entity.beans.Persona;
 import entity.beans.Persona.TipoPersona;
   
@@ -83,15 +87,24 @@ public class PersonaBean {
     	
     }
     private String guardarPersona(Persona persona){
-    	DBManager mgr = new DBManager();
-    	
+    	//DBManager mgr = new DBManager();
+    
     	persona.setNombre(this.getNombre());
     	persona.setApellido(this.getApellido());
     	persona.setDireccion(this.getDireccion());
     	persona.setNumeroDocumento(this.getCiruc());
     	persona.setSaldoDisponible(new BigDecimal((this.getSaldoDisponible()!=null && this.getSaldoDisponible()!="")?this.getSaldoDisponible():"0"));
     	persona.setTelefono(this.getTelefono());
-    	mgr.guardarPersona(persona);
+    	//mgr.guardarPersona(persona);
+    	Context context;
+		  try {
+		   context = new InitialContext();
+		   PersonaLocal personasBean = (PersonaLocal) context
+		     .lookup("java:app/test1/Persona!session.beans.PersonaLocal");
+		     personasBean.guardarPersona(persona); 
+		  } catch (NamingException e) {
+		   e.printStackTrace();
+		  }
     	FacesMessage msg = new FacesMessage("Guardado con Éxito", this.getNombre() + " " + this.getApellido());  
         FacesContext.getCurrentInstance().addMessage(null, msg);
         setearANull();

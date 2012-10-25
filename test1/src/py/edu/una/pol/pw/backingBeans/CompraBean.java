@@ -8,12 +8,15 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
-import py.edu.una.pol.pw.manager.DBManager;
+import session.beans.CompraLocal;
+import session.beans.ListadosLocal;
 import entity.beans.Compra;
 import entity.beans.CompraDetalle;
 import entity.beans.Persona;
-import entity.beans.Persona.TipoPersona;
 import entity.beans.Producto;
   
 @ManagedBean
@@ -78,15 +81,27 @@ public class CompraBean {
 	}
 	
 	public String insertarCompra(){
-		DBManager dbm = new DBManager();
-		if (dbm.guardarCompra(this.compra)){
+		//DBManager dbm = new DBManager();
+		Context context;
+		  try {
+		   context = new InitialContext();
+		   CompraLocal compraBean = (CompraLocal) context.lookup("java:app/test1/Compra!session.beans.CompraLocal");
+		   compraBean.guardarCompra(compra); 
+			FacesMessage msg = new FacesMessage("Compra Generada con Éxito" );  
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+		  } catch (NamingException e) {
+		   e.printStackTrace();
+			FacesMessage msg = new FacesMessage("Compra No generada, fijarse en Registro");  
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+		  }
+		/*if (dbm.guardarCompra(this.compra)){
 			FacesMessage msg = new FacesMessage("Compra Generada con Éxito" );  
 	        FacesContext.getCurrentInstance().addMessage(null, msg);
 		}else{
 			FacesMessage msg = new FacesMessage("Compra No generada, fijarse en Registro");  
 	        FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("#{CompraBean}");
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("#{CompraBean}");*/
 		setearANull();
 		return "";
 	}
@@ -106,20 +121,35 @@ public class CompraBean {
 		this.compra.getDetalles().remove(pos);
 	}
 	public List<Persona> getProveedores() {
-		DBManager dbm = new DBManager(); 
+		//DBManager dbm = new DBManager(); 
 		
-		this.proveedores = dbm.getPersonas(TipoPersona.PROVEEDOR.toInt());
-		
+		//this.proveedores = dbm.getPersonas(TipoPersona.PROVEEDOR.toInt());
+		Context context;
+		  try {
+		   context = new InitialContext();
+		   ListadosLocal listadosBean = (ListadosLocal) context
+		     .lookup("java:app/test1/Listados!session.beans.ListadosLocal");
+		   proveedores = listadosBean.getProveedores();
+		  } catch (NamingException e) {
+		   e.printStackTrace();
+		  }
 		return this.proveedores;
 	}
 	public void setProveedores(List<Persona> proveedores) {
 		this.proveedores = proveedores;
 	}
 	public List<Producto> getProductos() {
-		DBManager dbm = new DBManager(); 
-		
-		this.productos = dbm.getProductos();
-		
+		//DBManager dbm = new DBManager(); 
+		//this.productos = dbm.getProductos();
+		Context context;
+		  try {
+		   context = new InitialContext();
+		   ListadosLocal listadosBean = (ListadosLocal) context
+		     .lookup("java:app/test1/Listados!session.beans.ListadosLocal");
+		   productos = listadosBean.getProductos();
+		  } catch (NamingException e) {
+		   e.printStackTrace();
+		  }
 		return this.productos;
 	}
 	public void setProductos(List<Producto> productos) {
@@ -131,15 +161,35 @@ public class CompraBean {
 		return codProducto;
 	}
 	public void setCodProducto(String codProducto) {
-		DBManager mgr = new DBManager();
-		this.setProducto(mgr.getProducto(codProducto.split("-")[0]));
+		//DBManager mgr = new DBManager();
+		Context context;
+		  try {
+		   context = new InitialContext();
+		   CompraLocal compraBean = (CompraLocal) context
+		     .lookup("java:app/test1/Compra!session.beans.CompraLocal");
+		   //this.setProducto(compraBean.getProducto(codProducto.split("-")[0]));
+		   this.setProducto(producto);
+		  } catch (NamingException e) {
+		   e.printStackTrace();
+		  }
+		//this.setProducto(mgr.getProducto(codProducto.split("-")[0]));
 	}
 	public String getCodProveedor() {
 		return codProveedor;
 	}
 	public void setCodProveedor(String codProveedor) {
-		DBManager mgr = new DBManager();
-		this.compra.setProveedor(mgr.getPersona(codProveedor.split("-")[0]));
+		//DBManager mgr = new DBManager();
+		//this.compra.setProveedor(mgr.getPersona(codProveedor.split("-")[0]));
+		Context context;
+		  try {
+		   context = new InitialContext();
+		   CompraLocal compraBean = (CompraLocal) context
+		     .lookup("java:app/test1/Compra!session.beans.CompraLocal");
+		  // this.compra.setProveedor(compraBean.getPersona(codProveedor.split("-")[0]));
+		   this.setCodProveedor(codProveedor);
+		  } catch (NamingException e) {
+		   e.printStackTrace();
+		  }
 	}
 	public Producto getProducto() {
 		return producto;
