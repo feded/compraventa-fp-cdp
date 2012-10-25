@@ -13,9 +13,12 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 
+import entity.beans.Compra;
 import entity.beans.Persona;
 import entity.beans.Persona.TipoPersona;
 import entity.beans.Producto;
+import entity.beans.RegistroPago;
+import entity.beans.Venta;
 
 /**
  * Session Bean implementation class Listados
@@ -108,6 +111,68 @@ public class Listados implements ListadosLocal {
 		//	if (mgr!=null) mgr.close();
 		}
 		return productos;
+	}
+
+	@Override
+	public List<RegistroPago> getRegistroPagos() {
+		List<RegistroPago> registroPagos = new ArrayList<RegistroPago>();
+		
+		try{
+		
+			CriteriaBuilder cb = mgr.getCriteriaBuilder();
+			CriteriaQuery cq = cb.createQuery(RegistroPago.class);
+			Root personaEntity = cq.from(RegistroPago.class);
+			TypedQuery q = mgr.createQuery(cq);
+			registroPagos = q.getResultList();
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			//if (mgr!=null) mgr.close();
+		}
+		return registroPagos;
+	}
+
+	@Override
+	public List<Venta> getVentas() {
+		List<Venta> ventas = new ArrayList<Venta>();
+		
+		try{
+			
+			CriteriaBuilder cb = mgr.getCriteriaBuilder();
+			CriteriaQuery cq = cb.createQuery(Venta.class);
+			Root personaEntity = cq.from(Venta.class);
+			TypedQuery q = mgr.createQuery(cq);
+			ventas = q.getResultList();
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			//if (mgr!=null) mgr.close();
+		}
+		return ventas;
+	}
+
+	
+
+	@Override
+	public List<Compra> getCompras() {
+		List<Compra> compras = new ArrayList<Compra>();
+
+		try{
+			
+			CriteriaBuilder cb = mgr.getCriteriaBuilder();
+			CriteriaQuery cq = cb.createQuery(Compra.class);
+			Root personaEntity = cq.from(Compra.class);
+			TypedQuery q = mgr.createQuery(cq);
+			compras= q.getResultList();
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			//if (mgr!=null) mgr.close();
+		}
+		return compras;
 	}
 
     	

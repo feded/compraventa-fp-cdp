@@ -22,9 +22,7 @@ import entity.beans.Producto;
 public class ListadoProductosBean{  
 
 	private List<Producto> productos;
-	 
-	
-  
+
     public List<Producto> getProductos() {
 		return productos;
 	}
