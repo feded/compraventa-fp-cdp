@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="CargaPagosService" targetNamespace="http://beans.session/" xmlns:ns1="http://interfaces.beans.session/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://beans.session/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:import location="CargaPagosWebService.wsdl" namespace="http://interfaces.beans.session/">
+    </wsdl:import>
+  <wsdl:binding name="CargaPagosServiceSoapBinding" type="ns1:CargaPagosWebService">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="cargarPagos">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="cargarPagos">
+        <soap:body namespace="http://interfaces.beans.session/" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cargarPagosResponse">
+        <soap:body namespace="http://interfaces.beans.session/" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CargaPagosService">
+    <wsdl:port binding="tns:CargaPagosServiceSoapBinding" name="CargaPagosPort">
+      <soap:address location="http://Fede-PC:8080/test1/CargaPagos"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

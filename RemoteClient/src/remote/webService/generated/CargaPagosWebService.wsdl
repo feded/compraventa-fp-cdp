@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CargaPagosWebService" targetNamespace="http://interfaces.beans.session/" xmlns:ns1="http://interfaces.beans.session/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:message name="cargarPagos">
+    <wsdl:part name="arg0" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cargarPagosResponse">
+  </wsdl:message>
+  <wsdl:portType name="CargaPagosWebService">
+    <wsdl:operation name="cargarPagos">
+      <wsdl:input name="cargarPagos" message="ns1:cargarPagos">
+    </wsdl:input>
+      <wsdl:output name="cargarPagosResponse" message="ns1:cargarPagosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
